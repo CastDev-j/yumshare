@@ -1,32 +1,13 @@
-const getEnvVar = (key: string, defaultValue?: string): string => {
-  const value = process.env[key];
-  if (!value && !defaultValue) {
-    throw new Error(`Missing environment variable: ${key}`);
-  }
-  return value || defaultValue!;
-};
-
+// Configuración centralizada de variables de entorno
 export const env = {
   supabase: {
-    get url() {
-      return getEnvVar("NEXT_PUBLIC_SUPABASE_URL");
-    },
-    get anonKey() {
-      return getEnvVar("NEXT_PUBLIC_SUPABASE_ANON_KEY");
-    },
+    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   },
   site: {
-    get url() {
-      return getEnvVar("NEXT_PUBLIC_SITE_URL", "http://localhost:3000");
-    },
+    url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   },
-  get nodeEnv() {
-    return process.env.NODE_ENV;
-  },
-  get isDevelopment() {
-    return process.env.NODE_ENV === "development";
-  },
-  get isProduction() {
-    return process.env.NODE_ENV === "production";
-  },
+  nodeEnv: process.env.NODE_ENV,
+  isDevelopment: process.env.NODE_ENV === "development",
+  isProduction: process.env.NODE_ENV === "production",
 } as const;
