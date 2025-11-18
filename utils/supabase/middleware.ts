@@ -1,6 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
-import { env } from "@/config/env";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export const createClient = (request: NextRequest) => {
   // Create an unmodified response
@@ -10,7 +12,7 @@ export const createClient = (request: NextRequest) => {
     },
   });
 
-  createServerClient(env.supabase.url, env.supabase.anonKey, {
+  createServerClient(supabaseUrl!, supabaseKey!, {
     cookies: {
       getAll() {
         return request.cookies.getAll();
