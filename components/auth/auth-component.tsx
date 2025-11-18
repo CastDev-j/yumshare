@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { signInWithGoogle } from "@/app/auth/actions";
-import { supabase } from "@/utils/supabase/browser";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
+
+const supabase = createClient();
 
 const AuthComponent = () => {
   const router = useRouter();
