@@ -1,12 +1,12 @@
 import type { NextRequest } from "next/server";
+import { createClient } from "@/utils/supabase/middleware";
 
-export function proxy(request: NextRequest) {
-  // Proxy logic goes here
+export async function proxy(request: NextRequest) {
+  return createClient(request);
 }
 
 export const config = {
   matcher: [
-    // Exclude API routes, static files, image optimizations, and .png files
-    "/((?!api|_next/static|_next/image|.*\\.png$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
