@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { signInWithGoogle } from "@/app/auth/actions";
-import { supabase } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/browser";
 import { useRouter } from "next/navigation";
 
 const AuthComponent = () => {
