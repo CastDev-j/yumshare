@@ -1,4 +1,5 @@
 import AuthComponent from "@/components/auth/auth-component";
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (

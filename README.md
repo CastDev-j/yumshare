@@ -1,3 +1,18 @@
+Setup
+
+- Create a `.env.local` in the project root with:
+
+	NEXT_PUBLIC_SUPABASE_URL=your-project-url
+	NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+	NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+	Get URL and anon key in Supabase Dashboard → Project → Settings → API.
+
+- Install deps and run:
+
+	npm install
+	npm run dev
+
 Frontend & Framework
 
 Next.js 16 (App Router)
