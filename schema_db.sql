@@ -1,8 +1,3 @@
--- ============================================
--- RECIPE SOCIAL NETWORK - DATABASE SCHEMA
--- 15 Tablas + PostgreSQL + Supabase
--- ============================================
-
 -- 1. PROFILES (Usuarios)
 CREATE TABLE profiles (
 id UUID PRIMARY KEY,
@@ -177,9 +172,6 @@ actual_preparation_time INT CHECK (actual_preparation_time >= 0),
 created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- ============================================
--- ÍNDICES PARA OPTIMIZACIÓN
--- ============================================
 
 CREATE INDEX idx_recipes_author ON recipes(author_id);
 CREATE INDEX idx_recipes_public ON recipes(is_public);
