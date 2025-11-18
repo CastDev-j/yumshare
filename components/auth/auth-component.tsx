@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { signInWithGoogle } from "@/app/auth/actions";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
-const supabase = createClient();
-
 const AuthComponent = () => {
   const router = useRouter();
+  const supabase = useMemo(() => createClient(), []);
   const [loading, setLoading] = useState(false);
   const [isAuthed, setIsAuthed] = useState<boolean | null>(null);
   const [email, setEmail] = useState<string | null>(null);
@@ -35,7 +34,7 @@ const AuthComponent = () => {
       mounted = false;
       sub.subscription.unsubscribe();
     };
-  }, []);
+  }, [supabase]);
 
   const handleSignIn = async () => {
     setLoading(true);
