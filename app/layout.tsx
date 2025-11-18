@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   description: "Comparte y descubre recetas deliciosas con YumShare",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{
