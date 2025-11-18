@@ -4,22 +4,24 @@ import React, { useEffect, useMemo, useState } from "react";
 import { signInWithGoogle } from "@/app/auth/actions";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
+import { Button } from "../ui/button";
 
 const AuthComponent = () => {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [loading, setLoading] = useState(false);
   const [isAuthed, setIsAuthed] = useState<boolean | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
 
   useEffect(() => {
     let mounted = true;
 
     const init = async () => {
       const { data } = await supabase.auth.getSession();
+
+      console.log(data);
+
       if (!mounted) return;
       setIsAuthed(!!data.session?.user);
-      setEmail(data.session?.user?.email ?? null);
     };
 
     init();
@@ -27,7 +29,6 @@ const AuthComponent = () => {
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!mounted) return;
       setIsAuthed(!!session?.user);
-      setEmail(session?.user?.email ?? null);
     });
 
     return () => {
@@ -63,23 +64,18 @@ const AuthComponent = () => {
     <div className="flex items-center gap-3">
       {isAuthed ? (
         <>
-          <span className="text-sm text-neutral-600">{email ?? "Usuario"}</span>
-          <button
+          <Button
             onClick={handleSignOut}
             disabled={loading}
-            className="px-3 py-1.5 rounded bg-neutral-200 hover:bg-neutral-300 text-sm"
+            variant={"outline"}
           >
             {loading ? "Cerrando…" : "Cerrar sesión"}
-          </button>
+          </Button>
         </>
       ) : (
-        <button
-          onClick={handleSignIn}
-          disabled={loading}
-          className="px-3 py-1.5 rounded bg-black text-white hover:bg-neutral-800 text-sm"
-        >
+        <Button onClick={handleSignIn} disabled={loading}>
           {loading ? "Abriendo Google…" : "Iniciar sesión con Google"}
-        </button>
+        </Button>
       )}
     </div>
   );
